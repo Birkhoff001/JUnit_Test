@@ -26,11 +26,10 @@ public class SentenceTest {
 	@Test
 	public void testSentence() throws IOException {
 		String url = "http://active.uqee.com:8081/query";
-		String param = "20";
+		String param = "30";
 		String s = HttpRequest.sendGet(url, param);
 		System.out.println(s);		
 	
-//		choice = "查询年龄18的员工的名字,年龄,生日,工资,技能","查询工资18的员工的名字,年龄,生日,工资,技能"
 	}
 
 }

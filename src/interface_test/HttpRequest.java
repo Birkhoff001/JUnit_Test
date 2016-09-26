@@ -1,6 +1,7 @@
 package interface_test;
 
 import java.io.BufferedReader;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,12 +12,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
-
-/*import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;*/
-
+import interface_test.Common;
 
 public class HttpRequest {
 	/*
@@ -31,6 +27,7 @@ public class HttpRequest {
 
 	public static String sendGet(String url, String param) {
 		String in = param;
+		String lines = "";
 		//BufferedReader in = new BufferedReader(new FileReader("foo.in"));
 		try {
 			String urlNameString = url + "?sentence=" + param;
@@ -47,35 +44,41 @@ public class HttpRequest {
 			conn.setRequestMethod("GET");
 			conn.setConnectTimeout(10000);
 			conn.setReadTimeout(10000);
+			
+			Map<String, java.util.List<String>> map = conn.getHeaderFields();
+			for (String key : map.keySet()) {
+				System.out.println(key + "---->" + map.get(key));
+				}
+			
 			int responseCode = conn.getResponseCode();
+			System.out.println("\n"+ "Sending GET request to URL: " + url + " --------》");
 			if (responseCode != 200) {
 				conn.disconnect();
 				System.err.print(responseCode);
-				return in;
+				return null;
 			}
 			//ObjectMapper mapper = new ObjectMapper();
 
 			//get characters all of the data return for server
-			BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			System.out.println("======Contents of get request======");
-			String lines;
-			while ((lines = reader.readLine()) != null) {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+			System.out.println("======Contents of get request======" + "\n");
+			
+			String line;
+			while ((line = reader.readLine()) != null) {
+				lines += line;
 				System.out.println(lines);
 			}
 			reader.close();
 			
 			//close connection
 			conn.disconnect();
-			System.out.println("======Contents of get request ends======");
-		}
-		catch (Exception e) {
+			System.out.println("\n"+ "======Contents of get request ends======");
+			
+		} catch (Exception e) {
 			System.out.println("send GET request err------------!" + e);
 			e.printStackTrace();
 		}
-		return param;
-
-
-
+		return lines;
 	}
 	public String sendPost(String url, String param) {
 		PrintWriter out = null;
@@ -103,11 +106,7 @@ public class HttpRequest {
 			out.flush();
 			//defined BufferedReader InputStream to readline url response.
 			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			
-			String line;
-			while ((line = in.readLine()) != null) {
-				result += line;
-			}
+
 		}
 		catch (Exception e) {
 			System.out.println("send POST request err------------!" + e);
@@ -123,7 +122,7 @@ public class HttpRequest {
 				e.printStackTrace();
 			}
 		}
-		return result;
+		return param;
 	}
 }
 

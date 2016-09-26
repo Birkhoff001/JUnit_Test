@@ -45,7 +45,8 @@ public class CalculatorTest {
 		calculator.add(8);
 		calculator.divide(2);
 		assertEquals(4, calculator.getResult());
+		
 	}
-	
+
 
 }

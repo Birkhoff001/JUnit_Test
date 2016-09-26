@@ -2,8 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="/Users/Birkhoff/workspace/jars/chardet.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/Users/Birkhoff/workspace/jars/jackson-annotations-2.7.0.jar"/>
 	<classpathentry kind="lib" path="/Users/Birkhoff/workspace/jars/jackson-databind-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Birkhoff/workspace/jars/jackson-dataformat-csv-2.2.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Birkhoff/Downloads/json.org.jar"/>
+	<classpathentry kind="lib" path="/Users/Birkhoff/workspace/jars/jackson-core-2.7.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
