@@ -75,7 +75,13 @@ public class Common {
 			else {
 				System.out.println(json);
 			}
+<<<<<<< HEAD
 		} catch (IOException e) {
+=======
+		} catch (JsonParseException e) {
+	        	e.printStackTrace();
+		} catch (JsonMappingException e) {
+>>>>>>> master
 			e.printStackTrace();
 		}	
 	}
