@@ -44,35 +44,33 @@ public class HttpRequest {
 			conn.setRequestMethod("GET");
 			conn.setConnectTimeout(10000);
 			conn.setReadTimeout(10000);
-			
+			System.out.println("\n"+ "Sending GET request to URL: " + url + " --------》");
 			Map<String, java.util.List<String>> map = conn.getHeaderFields();
 			for (String key : map.keySet()) {
 				System.out.println(key + "---->" + map.get(key));
 				}
 			
-			int responseCode = conn.getResponseCode();
-			System.out.println("\n"+ "Sending GET request to URL: " + url + " --------》");
-			if (responseCode != 200) {
-				conn.disconnect();
-				System.err.print(responseCode);
-				return null;
-			}
 			//ObjectMapper mapper = new ObjectMapper();
 
 			//get characters all of the data return for server
 			BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
 			System.out.println("======Contents of get request======" + "\n");
-			
+
 			String line;
 			while ((line = reader.readLine()) != null) {
 				lines += line;
 				System.out.println(lines);
 			}
 			reader.close();
-			
+			int responseCode = conn.getResponseCode();
+			if (responseCode != 200) {	
+				conn.disconnect();
+				System.err.print(responseCode);
+				return null;
+			}
 			//close connection
 			conn.disconnect();
-			System.out.println("\n"+ "======Contents of get request ends======");
+			System.out.println("\n"+ "======Contents of get request ends======" + "\n");
 			
 		} catch (Exception e) {
 			System.out.println("send GET request err------------!" + e);
@@ -81,6 +79,7 @@ public class HttpRequest {
 		return lines;
 	}
 	public String sendPost(String url, String param) {
+		System.out.println("print line------------7");
 		PrintWriter out = null;
 		BufferedReader in = null;
 		try {

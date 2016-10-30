@@ -1,0 +1,28 @@
+struct sentence {
+	String param1;
+	String age;
+	String birth;
+	String salary;
+	String skill;
+};
+String<sentence> m_sentence;
+
+String sentence_type;
+
+struct fields {
+	String name;
+	int age;
+	String birth;
+	int salary;
+	String skill;
+};
+List<fields> m_fields;
+
+struct rows { 
+	List<List <String>> name;
+	List<List <String>> age;
+	List<List <String>> birth;
+	List<List <String>> salary;
+	List<List <String>> skill;
+}
+List<List <String>> m_rows;
