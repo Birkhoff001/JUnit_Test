@@ -1,35 +1,40 @@
 package interface_testcase;
 
-import static org.junit.Assert.*;
+import java.util.Map;
 
-import java.io.IOException;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import interface_test.Common;
-import interface_test.HttpRequest;
-import interface_test.getSentence;
-import interface_test.URLConnection;
 
+class Sentence {
+	Sentence() {}
+	String url() {
+		return "http://115.239.196.189:8081/query";
+	}
+	String param() {
+		return "20";
+	}
+	void getForm() {
+		new Common();
+	}
+	void assertsResult() {
+		getForm();
+		Map<String, Object> convert = Common.ConvertFromJson(url(), param(), "");
+		Object result = convert.get("result");
+		assertEquals("result:", result);
+	}
+	void assertsSentenceType() {
+		getForm();
+		Map<String, Object> convert = Common.ConvertFromJson(url(), param(), "");
+		Object result = convert.get("result");
+		assertEquals(param(), getForm());
+	}
+	public void prt(String s) {
+		System.out.println("\n" + "============" + "语音输入：" + param());
+	}
+}
 public class SentenceTest {
-
-	@Before
-	public void setUp() throws Exception {
+	public void sentenceTest() throws Exception {
+		Sentence sen = new Sentence();
+		sen.assertsResult();
+		sen.assertsSentenceType();
 	}
-		
-	@After
-	public void tearDown() throws Exception {
-
-	}
-
-	@Test
-	public void testSentence() throws IOException {
-		String url = "http://active.uqee.com:8081/query";
-		String param = "30";
-		String s = HttpRequest.sendGet(url, param);
-		System.out.println(s);		
-	
-	}
-
 }
